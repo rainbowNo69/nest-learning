@@ -8,6 +8,7 @@ export class PostsController {
     @Get()
     find(@Body() body){
         // console.log(111,body)
+        console.log('posts')
         return this.postsService.sayService()
     }
 }
