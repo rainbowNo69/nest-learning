@@ -11,10 +11,10 @@ import { LoginGuard } from './login.guard';
   imports: [PostsModule],
   controllers: [AppController],
   providers: [AppService,
-  {
-    provide:APP_GUARD,
-    useClass:LoginGuard
-  }
+  // {
+  //   provide:APP_GUARD,
+  //   useClass:LoginGuard
+  // }
   ],
 })
 export class AppModule implements OnModuleInit,OnApplicationBootstrap,NestModule {

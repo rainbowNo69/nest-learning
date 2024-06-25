@@ -1,16 +1,19 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LoginGuard } from './login.guard';
+import { PostsService } from './posts/posts.service';
+import { TimeInterceptor } from './time.interceptor';
 
 // 主路径为 app
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService,private postsService:PostsService) {}
 
   @Get("app")
-  @UseGuards(LoginGuard)
+  // @UseGuards(LoginGuard)
+  @UseInterceptors(TimeInterceptor)
   getHello(): object {
-    console.log('get /app')
+    // return this.postsService.sayService()
     return this.appService.getHello();
   }
 }
