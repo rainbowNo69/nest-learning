@@ -7,9 +7,10 @@ import { LogMiddleware } from './log.middleware';
 // import { APP_GUARD } from '@nestjs/core';
 // import { LoginGuard } from './login.guard';
 import { DatabaseModule } from './database/database.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
-  imports: [PostsModule, DatabaseModule],
+  imports: [PostsModule, DatabaseModule, EmployeeModule],
   controllers: [AppController],
   providers: [
     AppService,
