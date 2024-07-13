@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): object {
+    console.log('getHello')
     return {
       code:200,
       data:[
