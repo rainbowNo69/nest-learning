@@ -8,9 +8,16 @@ import { LogMiddleware } from './log.middleware';
 // import { LoginGuard } from './login.guard';
 import { DatabaseModule } from './database/database.module';
 import { EmployeeModule } from './employee/employee.module';
-
+import {ThrottlerModule, Throttle, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
-  imports: [PostsModule, DatabaseModule, EmployeeModule],
+  imports: [PostsModule, DatabaseModule, EmployeeModule,
+    ThrottlerModule.forRoot([{
+      name:'long',
+      ttl:60000,
+      limit:3
+    }])
+  ],
   controllers: [AppController],
   providers: [
     AppService,
@@ -18,6 +25,10 @@ import { EmployeeModule } from './employee/employee.module';
     //   provide:APP_GUARD,
     //   useClass:LoginGuard
     // }
+    {
+      provide:APP_GUARD,
+      useClass:ThrottlerGuard
+    }
   ],
 })
 export class AppModule
