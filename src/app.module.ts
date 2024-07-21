@@ -10,13 +10,15 @@ import { DatabaseModule } from './database/database.module';
 import { EmployeeModule } from './employee/employee.module';
 import {ThrottlerModule, Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { MyLoggerModule } from './my-logger/my-logger.module';
 @Module({
   imports: [PostsModule, DatabaseModule, EmployeeModule,
     ThrottlerModule.forRoot([{
       name:'long',
       ttl:60000,
-      limit:100
-    }])
+      limit:200
+    }]),
+    // MyLoggerModule
   ],
   controllers: [AppController],
   providers: [

@@ -4,10 +4,16 @@ import { AppModule } from './app.module';
 import * as session from 'express-session'
 import { NextFunction } from 'express';
 import { LoginGuard } from './login.guard';
+// import { MyLoggerService } from './my-logger/my-logger.service';
  
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule,
+  // {
+  //   bufferLogs:true
+  // }
+);
+  // app.useLogger(app.get(MyLoggerService))
 
   app.use(session({ secret: "XiaoMan", name: "xm.session", rolling: true, cookie: { maxAge: null } }))
   app.use(function(req: Request, res: Response, next: NextFunction) {
